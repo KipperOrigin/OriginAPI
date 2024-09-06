@@ -1,0 +1,4 @@
+name: OriginAPI
+version: '${project.version}'
+main: org.kipperorigin.originapi.OriginAPI
+api-version: '1.21'

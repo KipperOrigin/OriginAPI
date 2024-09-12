@@ -6,8 +6,8 @@ public final class OriginLib extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
-
+        OriginLibrary.initializeLibrary(this);
+        OriginLibrary.getParticleEffectManager().loadFromJson();
     }
 
     @Override

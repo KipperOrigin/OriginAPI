@@ -1,4 +1,4 @@
-package com.github.kipperorigin.originapi.particles;
+package com.github.kipperorigin.originlib.particles;
 
 public enum ParticleEffectBehavior {
     REPEAT,

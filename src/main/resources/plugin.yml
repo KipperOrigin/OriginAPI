@@ -1,4 +1,4 @@
-name: OriginAPI
+name: OriginLib
 version: '${project.version}'
-main: org.kipperorigin.originapi.OriginAPI
+main: org.kipperorigin.originlib.OriginLib
 api-version: '1.21'

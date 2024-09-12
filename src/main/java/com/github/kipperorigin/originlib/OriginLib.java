@@ -1,8 +1,8 @@
-package com.github.kipperorigin.originapi;
+package com.github.kipperorigin.originlib;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class OriginAPI extends JavaPlugin {
+public final class OriginLib extends JavaPlugin {
 
     @Override
     public void onEnable() {

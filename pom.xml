@@ -5,11 +5,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.github.kipperorigin</groupId>
-  <artifactId>originapi</artifactId>
+  <artifactId>originlib</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>OriginAPI</name>
+  <name>OriginLib</name>
 
   <properties>
     <java.version>18</java.version>
@@ -90,7 +90,7 @@
         <repository>
             <id>github</id>
             <name>GitHub KipperOrigin Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/KipperOrigin/OriginAPI</url>
+            <url>https://maven.pkg.github.com/KipperOrigin/OriginLib</url>
         </repository>
     </distributionManagement>
 

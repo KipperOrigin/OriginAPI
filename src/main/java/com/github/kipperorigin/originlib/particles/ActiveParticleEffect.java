@@ -1,4 +1,4 @@
-package com.github.kipperorigin.originapi.particles;
+package com.github.kipperorigin.originlib.particles;
 
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;

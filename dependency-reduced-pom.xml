@@ -2,8 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.kipperorigin</groupId>
-  <artifactId>originapi</artifactId>
-  <name>OriginAPI</name>
+  <artifactId>originlib</artifactId>
+  <name>OriginLib</name>
   <version>1.0-SNAPSHOT</version>
   <build>
     <resources>
@@ -65,7 +65,7 @@
     <repository>
       <id>github</id>
       <name>GitHub KipperOrigin Apache Maven Packages</name>
-      <url>https://maven.pkg.github.com/KipperOrigin/OriginAPI</url>
+      <url>https://maven.pkg.github.com/KipperOrigin/OriginLib</url>
     </repository>
   </distributionManagement>
   <properties>

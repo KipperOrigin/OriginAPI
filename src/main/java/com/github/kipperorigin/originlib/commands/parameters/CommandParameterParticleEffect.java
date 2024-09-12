@@ -1,6 +1,6 @@
-package com.github.kipperorigin.originapi.commands.parameters;
+package com.github.kipperorigin.originlib.commands.parameters;
 
-import com.github.kipperorigin.originapi.particles.ParticleEffect;
+import com.github.kipperorigin.originlib.particles.ParticleEffect;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.github.kipperorigin.originapi.utils;
+package com.github.kipperorigin.originlib.utils;
 
 import java.util.ArrayList;
 import java.util.List;

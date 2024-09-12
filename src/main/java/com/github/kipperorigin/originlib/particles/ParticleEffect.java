@@ -1,4 +1,4 @@
-package com.github.kipperorigin.originapi.particles;
+package com.github.kipperorigin.originlib.particles;
 
 import com.comphenix.protocol.wrappers.WrappedParticle;
 

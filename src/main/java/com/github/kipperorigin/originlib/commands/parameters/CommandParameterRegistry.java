@@ -1,4 +1,4 @@
-package com.github.kipperorigin.originapi.commands.parameters;
+package com.github.kipperorigin.originlib.commands.parameters;
 
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;

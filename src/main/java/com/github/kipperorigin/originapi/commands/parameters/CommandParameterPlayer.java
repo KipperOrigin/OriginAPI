@@ -1,4 +1,4 @@
-package org.kipperorigin.originapi.commands.parameters;
+package com.github.kipperorigin.originapi.commands.parameters;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

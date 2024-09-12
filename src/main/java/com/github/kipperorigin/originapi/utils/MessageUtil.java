@@ -1,4 +1,4 @@
-package org.kipperorigin.originapi.utils;
+package com.github.kipperorigin.originapi.utils;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;

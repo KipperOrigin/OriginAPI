@@ -1,4 +1,4 @@
-package org.kipperorigin.originapi;
+package com.github.kipperorigin.originapi;
 
 import org.bukkit.plugin.java.JavaPlugin;
 

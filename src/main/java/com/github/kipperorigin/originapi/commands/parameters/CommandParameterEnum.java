@@ -1,4 +1,4 @@
-package org.kipperorigin.originapi.commands.parameters;
+package com.github.kipperorigin.originapi.commands.parameters;
 
 import java.util.ArrayList;
 import java.util.Arrays;

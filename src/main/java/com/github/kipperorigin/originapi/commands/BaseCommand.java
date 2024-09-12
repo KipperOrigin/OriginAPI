@@ -1,8 +1,8 @@
-package org.kipperorigin.originapi.commands;
+package com.github.kipperorigin.originapi.commands;
 
 import org.bukkit.command.CommandSender;
-import org.kipperorigin.originapi.commands.parameters.CommandParameter;
-import org.kipperorigin.originapi.utils.MessageUtil;
+import com.github.kipperorigin.originapi.commands.parameters.CommandParameter;
+import com.github.kipperorigin.originapi.utils.MessageUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;

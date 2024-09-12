@@ -1,18 +1,18 @@
-package org.kipperorigin.originapi.commands.parameters;
+package com.github.kipperorigin.originapi.commands.parameters;
 
 import java.util.Collections;
 import java.util.List;
 
-public class CommandParameterInteger extends CommandParameter {
+public class CommandParameterFloat extends CommandParameter {
 
-    public CommandParameterInteger() {
-        super("must be an integer!");
+    public CommandParameterFloat() {
+        super("must be a float!");
     }
 
     @Override
     public boolean checkArgument(String argument) {
         try {
-            Integer.parseInt(argument);
+            Float.parseFloat(argument);
         } catch (NumberFormatException e) {
             return false;
         }
@@ -22,7 +22,7 @@ public class CommandParameterInteger extends CommandParameter {
     @Override
     public Object asObject(String argument) {
         try {
-            return Integer.parseInt(argument);
+            return Float.parseFloat(argument);
         } catch (NumberFormatException e) {
             return null;
         }
@@ -30,6 +30,6 @@ public class CommandParameterInteger extends CommandParameter {
 
     @Override
     public List<String> getTabCompletes() {
-        return Collections.singletonList("{integer}");
+        return Collections.singletonList("{float}");
     }
 }

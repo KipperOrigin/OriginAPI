@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/OriginAPI.iml" filepath="$PROJECT_DIR$/OriginAPI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OriginLib.iml" filepath="$PROJECT_DIR$/OriginLib.iml" />
     </modules>
   </component>
 </project>

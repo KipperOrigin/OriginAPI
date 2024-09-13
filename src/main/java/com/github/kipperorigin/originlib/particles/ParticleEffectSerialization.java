@@ -6,6 +6,7 @@ import org.bukkit.*;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 
 import java.lang.reflect.Type;
 
@@ -17,15 +18,9 @@ public class ParticleEffectSerialization {
             jsonObject.addProperty("particleEffectName", effect.getParticleEffectName());
             jsonObject.add("particleData", serializeParticleData(effect.getWrappedParticle()));
             jsonObject.addProperty("particleType", effect.getWrappedParticle().getParticle().name());
-            jsonObject.addProperty("initialX", effect.getInitialX());
-            jsonObject.addProperty("initialY", effect.getInitialY());
-            jsonObject.addProperty("initialZ", effect.getInitialZ());
-            jsonObject.addProperty("offsetX", effect.getOffsetX());
-            jsonObject.addProperty("offsetY", effect.getOffsetY());
-            jsonObject.addProperty("offsetZ", effect.getOffsetZ());
-            jsonObject.addProperty("formulaX", effect.getFormulaX());
-            jsonObject.addProperty("formulaY", effect.getFormulaY());
-            jsonObject.addProperty("formulaZ", effect.getFormulaZ());
+            jsonObject.add("initialPosition", serializeVector(effect.getInitialPosition()));
+            jsonObject.add("offset", serializeVector(effect.getOffset()));
+            jsonObject.addProperty("vectorFormula", effect.getVectorFormula());
             jsonObject.addProperty("particleCount", effect.getParticleCount());
             jsonObject.addProperty("longDistance", effect.isLongDistance());
             jsonObject.addProperty("startDelay", effect.getStartDelay());
@@ -48,15 +43,9 @@ public class ParticleEffectSerialization {
             Particle particleType = Particle.valueOf(jsonObject.get("particleType").getAsString());
             Object particleData = jsonObject.has("particleData") ? deserializeParticleData(jsonObject.get("particleData").getAsJsonObject(), particleType) : null;
             WrappedParticle<?> wrappedParticle = WrappedParticle.create(particleType, particleData);
-            double initialX = jsonObject.get("initialX").getAsDouble();
-            double initialY = jsonObject.get("initialY").getAsDouble();
-            double initialZ = jsonObject.get("initialZ").getAsDouble();
-            float offsetX = jsonObject.get("offsetX").getAsFloat();
-            float offsetY = jsonObject.get("offsetY").getAsFloat();
-            float offsetZ = jsonObject.get("offsetZ").getAsFloat();
-            String formulaX = jsonObject.get("formulaX").getAsString();
-            String formulaY = jsonObject.get("formulaY").getAsString();
-            String formulaZ = jsonObject.get("formulaZ").getAsString();
+            Vector initialPosition = deserializeVector(jsonObject.get("initialPosition").getAsJsonObject());
+            Vector offset = deserializeVector(jsonObject.get("offset").getAsJsonObject());
+            String vectorFormula = jsonObject.get("vectorFormula").getAsString();
             int particleCount = jsonObject.get("particleCount").getAsInt();
             boolean longDistance = jsonObject.get("longDistance").getAsBoolean();
             long startDelay = jsonObject.get("startDelay").getAsLong();
@@ -69,15 +58,28 @@ public class ParticleEffectSerialization {
 
             return new ParticleEffect(
                     particleEffectName, wrappedParticle,
-                    initialX, initialY, initialZ,
-                    offsetX, offsetY, offsetZ,
-                    formulaX, formulaY, formulaZ,
+                    initialPosition, offset, vectorFormula,
                     particleCount, longDistance,
                     startDelay, delayBetweenEmits, duplicateValue,
                     behavior, repetitionsBeforeBehavior,
                     totalSteps, rotationDivisor
             );
         }
+    }
+
+    private static JsonObject serializeVector(Vector vector) {
+        JsonObject vectorObject = new JsonObject();
+        vectorObject.addProperty("x", vector.getX());
+        vectorObject.addProperty("y", vector.getY());
+        vectorObject.addProperty("z", vector.getZ());
+        return vectorObject;
+    }
+
+    private static Vector deserializeVector(JsonObject vectorObject) {
+        double x = vectorObject.get("x").getAsDouble();
+        double y = vectorObject.get("y").getAsDouble();
+        double z = vectorObject.get("z").getAsDouble();
+        return new Vector(x, y, z);
     }
 
     private static JsonElement serializeParticleData(WrappedParticle<?> wrappedParticle) {

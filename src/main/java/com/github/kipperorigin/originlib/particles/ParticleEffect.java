@@ -1,14 +1,14 @@
 package com.github.kipperorigin.originlib.particles;
 
 import com.comphenix.protocol.wrappers.WrappedParticle;
+import org.bukkit.util.Vector;
 
 public class ParticleEffect {
-
     private String particleEffectName;
     private WrappedParticle<?> wrappedParticle;
-    private double initialX, initialY, initialZ;
-    private float offsetX, offsetY, offsetZ;
-    private String formulaX, formulaY, formulaZ;
+    private Vector initialPosition;
+    private Vector offset;
+    private String vectorFormula;
     private int particleCount;
     private boolean longDistance;
     private long startDelay;
@@ -21,24 +21,16 @@ public class ParticleEffect {
 
     // Constructor
     public ParticleEffect(String particleEffectName, WrappedParticle<?> wrappedParticle,
-                          double initialX, double initialY, double initialZ,
-                          float offsetX, float offsetY, float offsetZ,
-                          String formulaX, String formulaY, String formulaZ,
+                          Vector initialPosition, Vector offset, String vectorFormula,
                           int particleCount, boolean longDistance,
                           long startDelay, long delayBetweenEmits, int duplicateValue,
                           ParticleEffectBehavior behavior, int repetitionsBeforeBehavior,
                           int totalSteps, int rotationDivisor) {
         this.particleEffectName = particleEffectName;
         this.wrappedParticle = wrappedParticle;
-        this.initialX = initialX;
-        this.initialY = initialY;
-        this.initialZ = initialZ;
-        this.offsetX = offsetX;
-        this.offsetY = offsetY;
-        this.offsetZ = offsetZ;
-        this.formulaX = formulaX;
-        this.formulaY = formulaY;
-        this.formulaZ = formulaZ;
+        this.initialPosition = initialPosition;
+        this.offset = offset;
+        this.vectorFormula = vectorFormula;
         this.particleCount = particleCount;
         this.longDistance = longDistance;
         this.startDelay = startDelay;
@@ -48,6 +40,31 @@ public class ParticleEffect {
         this.repetitionsBeforeBehavior = repetitionsBeforeBehavior;
         this.totalSteps = totalSteps;
         this.rotationDivisor = rotationDivisor;
+    }
+
+    // Getters and setters
+    public String getVectorFormula() {
+        return vectorFormula;
+    }
+
+    public void setVectorFormula(String vectorFormula) {
+        this.vectorFormula = vectorFormula;
+    }
+
+    public Vector getInitialPosition() {
+        return initialPosition;
+    }
+
+    public void setInitialPosition(Vector initialPosition) {
+        this.initialPosition = initialPosition;
+    }
+
+    public Vector getOffset() {
+        return offset;
+    }
+
+    public void setOffset(Vector offset) {
+        this.offset = offset;
     }
 
     public String getParticleEffectName() {
@@ -64,78 +81,6 @@ public class ParticleEffect {
 
     public void setWrappedParticle(WrappedParticle<?> wrappedParticle) {
         this.wrappedParticle = wrappedParticle;
-    }
-
-    public double getInitialX() {
-        return initialX;
-    }
-
-    public void setInitialX(double initialX) {
-        this.initialX = initialX;
-    }
-
-    public double getInitialY() {
-        return initialY;
-    }
-
-    public void setInitialY(double initialY) {
-        this.initialY = initialY;
-    }
-
-    public double getInitialZ() {
-        return initialZ;
-    }
-
-    public void setInitialZ(double initialZ) {
-        this.initialZ = initialZ;
-    }
-
-    public float getOffsetX() {
-        return offsetX;
-    }
-
-    public void setOffsetX(float offsetX) {
-        this.offsetX = offsetX;
-    }
-
-    public float getOffsetY() {
-        return offsetY;
-    }
-
-    public void setOffsetY(float offsetY) {
-        this.offsetY = offsetY;
-    }
-
-    public float getOffsetZ() {
-        return offsetZ;
-    }
-
-    public void setOffsetZ(float offsetZ) {
-        this.offsetZ = offsetZ;
-    }
-
-    public String getFormulaX() {
-        return formulaX;
-    }
-
-    public void setFormulaX(String formulaX) {
-        this.formulaX = formulaX;
-    }
-
-    public String getFormulaY() {
-        return formulaY;
-    }
-
-    public void setFormulaY(String formulaY) {
-        this.formulaY = formulaY;
-    }
-
-    public String getFormulaZ() {
-        return formulaZ;
-    }
-
-    public void setFormulaZ(String formulaZ) {
-        this.formulaZ = formulaZ;
     }
 
     public int getParticleCount() {

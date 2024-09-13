@@ -15,10 +15,7 @@ import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ParticleEffectManager {
     private final Gson gson;
@@ -92,6 +89,30 @@ public class ParticleEffectManager {
         playParticleEffects(enity, effects.toArray(new ParticleEffect[0]));
     }
 
+    public void playParticleEffects(Entity entity, int counter, ActiveParticleEffect... effects) {
+        List<ActiveParticleEffect> activeEffects = Arrays.stream(effects).toList();
+        Location entityLocation = entity.getLocation();
+
+        for (ActiveParticleEffect effect : activeEffects) {
+
+            if (effect.getLocationsAtStep(counter) == null) continue;
+            List<Vector> currentLocations = effect.getLocationsAtStep(counter);
+            for (Vector vec : currentLocations) {
+                Location particleLoc = entityLocation.clone().add(vec);
+                spawnParticle(effect.getBaseEffect(), particleLoc);
+            }
+
+            effect.nextStep();
+
+            /*
+            if (effect.getBaseEffect().getBehavior() == ParticleEffectBehavior.END &&
+                    effect.getCurrentRepetition() >= effect.getBaseEffect().getRepetitionsBeforeBehavior()) {
+                activeEffects.remove(effect);
+            }
+            */
+        }
+    }
+
     public void playParticleEffects(Entity entity, ParticleEffect... effects) {
         List<ActiveParticleEffect> activeEffects = new ArrayList<>();
         for (ParticleEffect effect : effects) {
@@ -122,6 +143,7 @@ public class ParticleEffectManager {
         }, effects[0].getStartDelay(), effects[0].getDelayBetweenEmits());
     }
 
+
     private void spawnParticle(ParticleEffect effect, Location particleLoc) {
         ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
         PacketContainer packet = protocolManager.createPacket(PacketType.Play.Server.WORLD_PARTICLES);
@@ -132,9 +154,9 @@ public class ParticleEffectManager {
                 .write(1, particleLoc.getY())
                 .write(2, particleLoc.getZ());
         packet.getFloat()
-                .write(0, effect.getOffsetX())
-                .write(1, effect.getOffsetY())
-                .write(2, effect.getOffsetZ());
+                .write(0, (float) effect.getOffset().getX())
+                .write(1, (float) effect.getOffset().getY())
+                .write(2, (float) effect.getOffset().getZ());
         packet.getIntegers().write(0, effect.getParticleCount());
         packet.getBooleans().write(0, effect.isLongDistance());
 

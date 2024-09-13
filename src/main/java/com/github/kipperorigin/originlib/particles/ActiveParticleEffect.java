@@ -29,9 +29,7 @@ public class ActiveParticleEffect {
             List<Vector> stepLocations = new ArrayList<>();
             double t = (double) step / baseEffect.getTotalSteps();
 
-            double centerX = evaluateFormula(baseEffect.getFormulaX(), t);
-            double centerY = evaluateFormula(baseEffect.getFormulaY(), t);
-            double centerZ = evaluateFormula(baseEffect.getFormulaZ(), t);
+            Vector center = evaluateVectorFormula(baseEffect.getVectorFormula(), t);
 
             // Calculate the rotation angle for this step
             double rotationAngle = 2 * Math.PI * step / (baseEffect.getTotalSteps() * baseEffect.getRotationDivisor());
@@ -39,36 +37,61 @@ public class ActiveParticleEffect {
             if (baseEffect.getDuplicateValue() > 1) {
                 for (int i = 0; i < baseEffect.getDuplicateValue(); i++) {
                     double angle = 2 * Math.PI * i / baseEffect.getDuplicateValue() + rotationAngle;
-                    double radius = Math.sqrt(centerX * centerX + centerZ * centerZ);
-                    double x = radius * Math.cos(angle);
-                    double z = radius * Math.sin(angle);
-                    stepLocations.add(new Vector(x, centerY, z));
+                    Vector rotated = rotateAroundY(center, angle);
+                    stepLocations.add(rotated);
                 }
             } else {
                 // For single particle, rotate around Y-axis
-                double x = centerX * Math.cos(rotationAngle) - centerZ * Math.sin(rotationAngle);
-                double z = centerX * Math.sin(rotationAngle) + centerZ * Math.cos(rotationAngle);
-                stepLocations.add(new Vector(x, centerY, z));
+                Vector rotated = rotateAroundY(center, rotationAngle);
+                stepLocations.add(rotated);
             }
 
             particleLocations.add(stepLocations);
         }
     }
 
-    private double evaluateFormula(String formula, double t) {
+    private Vector evaluateVectorFormula(String vectorFormula, double t) {
+        String[] components = vectorFormula.split(",");
+        if (components.length != 3) {
+            throw new IllegalArgumentException("Vector formula must have exactly 3 components");
+        }
+
+        double x = evaluateComponent(components[0], t);
+        double y = evaluateComponent(components[1], t);
+        double z = evaluateComponent(components[2], t);
+
+        return new Vector(x, y, z).add(baseEffect.getInitialPosition());
+    }
+
+    private double evaluateComponent(String formula, double t) {
         Expression expression = new ExpressionBuilder(formula)
                 .variables("t", "x", "y", "z", "PI")
                 .build()
                 .setVariable("t", t)
-                .setVariable("x", baseEffect.getInitialX())
-                .setVariable("y", baseEffect.getInitialY())
-                .setVariable("z", baseEffect.getInitialZ())
+                .setVariable("x", baseEffect.getInitialPosition().getX())
+                .setVariable("y", baseEffect.getInitialPosition().getY())
+                .setVariable("z", baseEffect.getInitialPosition().getZ())
                 .setVariable("PI", Math.PI);
         return expression.evaluate();
     }
 
+    private Vector rotateAroundY(Vector v, double angle) {
+        double x = v.getX() * Math.cos(angle) - v.getZ() * Math.sin(angle);
+        double z = v.getX() * Math.sin(angle) + v.getZ() * Math.cos(angle);
+        return new Vector(x, v.getY(), z);
+    }
+
     public List<Vector> getCurrentLocations() {
         int index = isReversing ? (particleLocations.size() - 1 - currentStep) : currentStep;
+        return particleLocations.get(index);
+    }
+
+    public List<Vector> getLocationsAtStep(int counter) {
+        if (counter - baseEffect.getStartDelay() < 0 || counter - baseEffect.getStartDelay() % baseEffect.getDelayBetweenEmits() == 0) return null;
+        long stepCounter = counter - baseEffect.getStartDelay() % baseEffect.getDelayBetweenEmits();
+        long repetitions = stepCounter / baseEffect.getTotalSteps();
+        long remainder = stepCounter % baseEffect.getTotalSteps();
+        int index = (int) ((repetitions % 2 == 0) ? remainder : baseEffect.getTotalSteps() - remainder);
         return particleLocations.get(index);
     }
 

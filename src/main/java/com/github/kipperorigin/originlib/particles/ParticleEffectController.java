@@ -1,3 +1,5 @@
+package com.github.kipperorigin.originlib.particles;
+
 import com.github.kipperorigin.originlib.particles.ParticleEffect;
 import com.github.kipperorigin.originlib.particles.ParticleEffectManager;
 import org.bukkit.Bukkit;

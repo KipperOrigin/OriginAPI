@@ -5,7 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class OriginLibrary {
     private static OriginLibrary instance;
-    private final ParticleEffectManager particleEffectManager;
+    private static ParticleEffectManager particleEffectManager = null;
 
     private OriginLibrary(JavaPlugin plugin) {
         this.particleEffectManager = new ParticleEffectManager(plugin);
@@ -15,6 +15,7 @@ public class OriginLibrary {
         if (instance == null) {
             instance = new OriginLibrary(plugin);
         }
+        particleEffectManager = new ParticleEffectManager(plugin);
     }
 
     public static OriginLibrary getInstance() {

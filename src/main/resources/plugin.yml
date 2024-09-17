@@ -1,4 +1,5 @@
 name: OriginLib
 version: '${project.version}'
-main: org.kipperorigin.originlib.OriginLib
+main: com.github.kipperorigin.originlib.OriginLib
 api-version: '1.21'
+depend: [ProtocolLib]

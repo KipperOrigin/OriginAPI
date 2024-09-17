@@ -6,10 +6,10 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommandParameterPersistentDataType extends CommandParameter {
+public class CommandParameterPersistentDataTypeComplex extends CommandParameter {
 
     PersistentDataType dataType;
-    public CommandParameterPersistentDataType(PersistentDataType dataType) {
+    public CommandParameterPersistentDataTypeComplex(PersistentDataType dataType) {
         super("errorMessage");
 
     }

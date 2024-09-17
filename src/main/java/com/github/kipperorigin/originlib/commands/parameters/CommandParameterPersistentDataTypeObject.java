@@ -2,16 +2,15 @@ package com.github.kipperorigin.originlib.commands.parameters;
 
 import org.bukkit.persistence.PersistentDataType;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class CommandParameterPersistentDataType extends CommandParameter {
+public class CommandParameterPersistentDataTypeObject extends CommandParameter {
 
     Set<PersistentDataType> typeSet;
-    public CommandParameterPersistentDataType() {
+    public CommandParameterPersistentDataTypeObject() {
         super("errorMessage");
         typeSet = new HashSet<>();
         typeSet.add(PersistentDataType.BOOLEAN);

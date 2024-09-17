@@ -1,7 +1,6 @@
 package com.github.kipperorigin.originlib.listeners;
 
 import com.github.kipperorigin.originlib.OriginLibrary;
-import net.minecraft.world.level.block.Block;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.ArmorStand;
@@ -31,12 +30,13 @@ public class FlagDropEvent implements Listener {
         String particleName = meta.getPersistentDataContainer().get(new NamespacedKey("originnbt","ctfflag"), PersistentDataType.STRING);
 
 
-        Block block = null;
+        //Block block = null;
         Location loc = event.getPlayer().getLocation();
 
-        while (block == null) {
+        /*while (block == null) {
 
         }
+         */
 
         ArmorStand stand = (ArmorStand) event.getItemDrop().getWorld().spawnEntity(loc.add(.5,-.8,.75), EntityType.ARMOR_STAND);
         stand.getPersistentDataContainer().set(new NamespacedKey("originnbt","ctfflag"),PersistentDataType.STRING,particleName);

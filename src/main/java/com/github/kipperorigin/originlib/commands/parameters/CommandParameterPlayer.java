@@ -17,17 +17,21 @@ public class CommandParameterPlayer extends CommandParameter {
     @Override
     public boolean checkArgument(String argument) {
         for (Player player: playerList) {
-            if (player.getDisplayName().equalsIgnoreCase(argument)) return true;
+            if (player.getDisplayName().equalsIgnoreCase(argument) || player.getName().equalsIgnoreCase(argument)) return true;
         }
         return false;
     }
 
     @Override
     public Object asObject(String argument) {
+        //Backup will be used if no name matches, it will use display name. I.E. Bob is renamed Joe,
+        //it will choose Bob if Joe is searched and there is no Joe online.
+        Player backup = null;
         for (Player player: playerList) {
             if (player.getName().equalsIgnoreCase(argument)) return player;
+            if (player.getDisplayName().equalsIgnoreCase(argument)) backup = player;
         }
-        return null;
+        return backup;
     }
 
     @Override

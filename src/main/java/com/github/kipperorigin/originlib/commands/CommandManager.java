@@ -19,6 +19,7 @@ public abstract class CommandManager implements TabCompleter {
     public CommandManager(JavaPlugin plugin) {
         this.plugin = plugin;
         commands = new ArrayList<>();
+        registerCommands();
     }
 
     public abstract void registerCommands();

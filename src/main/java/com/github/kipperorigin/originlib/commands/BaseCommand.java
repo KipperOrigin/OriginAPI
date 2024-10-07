@@ -116,6 +116,10 @@ public abstract class BaseCommand {
         return command;
     }
 
+    public void setCommand(String command) {
+        this.command = command;
+    }
+
     public void setPermission(String permission) {
         this.permission = permission;
     }
